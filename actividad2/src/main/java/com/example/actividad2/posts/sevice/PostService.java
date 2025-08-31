@@ -25,19 +25,19 @@ public class PostService {
         ));
         comments.addAll(List.of(
                 new Comment(1L, 1L, "Ana", "¡Excelente!", 5, LocalDateTime.now().minusDays(9)),
-                new Comment(3L, 1L, "Jacob", "Podría ser mejor", 3, LocalDateTime.now().minusDays(4)),
-                new Comment(4L, 1L, "Manuel", "Me gustó", 4, LocalDateTime.now().minusDays(3)),
-                new Comment(5L, 1L, "Miguel", "Muy útil", 4, LocalDateTime.now().minusDays(8)),
+                new Comment(2L, 1L, "Jacob", "Podría ser mejor", 3, LocalDateTime.now().minusDays(4)),
+                new Comment(3L, 1L, "Manuel", "Me gustó", 4, LocalDateTime.now().minusDays(3)),
+                new Comment(4L, 1L, "Miguel", "Muy útil", 4, LocalDateTime.now().minusDays(8)),
 
-                new Comment(6L, 2L, "Carla", "Podría ser mejor", 3, LocalDateTime.now().minusDays(4)),
-                new Comment(7L, 2L, "Anuel", "Me gustó", 1, LocalDateTime.now().minusDays(3)),
-                new Comment(8L, 2L, "Dariel", "Podría ser mejor", 1, LocalDateTime.now().minusDays(4)),
-                new Comment(9L, 2L, "Amanda", "Me gustó", 5, LocalDateTime.now().minusDays(3)),
+                new Comment(5L, 2L, "Carla", "Podría ser mejor", 3, LocalDateTime.now().minusDays(4)),
+                new Comment(6L, 2L, "Anuel", "Me gustó", 1, LocalDateTime.now().minusDays(3)),
+                new Comment(7L, 2L, "Dariel", "Podría ser mejor", 1, LocalDateTime.now().minusDays(4)),
+                new Comment(8L, 2L, "Amanda", "Me gustó", 5, LocalDateTime.now().minusDays(3)),
 
-                new Comment(10L, 3L, "panda", "No Me gustó", 4, LocalDateTime.now().minusDays(3)),
-                new Comment(11L, 3L, "Manuel", "Me gustó pero no", 4, LocalDateTime.now().minusDays(3)),
-                new Comment(12L, 3L, "Amanda", "No me gusto", 1, LocalDateTime.now().minusDays(3)),
-                new Comment(13L, 3L, "Eva", "Faltan ejemplos", 2, LocalDateTime.now().minusHours(12))
+                new Comment(9L, 3L, "panda", "No Me gustó", 4, LocalDateTime.now().minusDays(3)),
+                new Comment(10L, 3L, "Manuel", "Me gustó pero no", 4, LocalDateTime.now().minusDays(3)),
+                new Comment(11L, 3L, "Amanda", "No me gusto", 1, LocalDateTime.now().minusDays(3)),
+                new Comment(12L, 3L, "Eva", "Faltan ejemplos", 2, LocalDateTime.now().minusHours(12))
         ));
     }
 
