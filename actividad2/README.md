@@ -59,6 +59,7 @@ curl -s http://localhost:8080/api/posts | jq .
 curl -s http://localhost:8080/api/posts/1 | jq .
 curl -s http://localhost:8080/api/posts/1/comments | jq .
 curl -s http://localhost:8080/api/posts/1/rating/average
+curl -s http://localhost:8080/api/posts/comments?minRating=1
 
 
 # Médicas (ajusta ID/RUT según datos semilla)
