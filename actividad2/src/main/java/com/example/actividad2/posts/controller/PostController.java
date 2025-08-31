@@ -1,5 +1,6 @@
 package com.example.actividad2.posts.controller;
 
+import com.example.actividad2.common.NotFoundException;
 import com.example.actividad2.posts.model.Comment;
 import com.example.actividad2.posts.model.Post;
 import com.example.actividad2.posts.sevice.PostService;
@@ -19,23 +20,42 @@ public class PostController {
     public PostController(PostService service){ this.service = service; }
 
     @GetMapping
-    public List<Post> list(){ return service.getAllPosts(); }
+    public List<Post> list(){
+        var all = service.getAllPosts();
+        if (all.isEmpty()) {
+            throw new NotFoundException("No se encontraron publicaciones");
+        }
+        return all;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Post> get(@PathVariable @Min(1) Long id){
-        return service.getPost(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return service.getPost(id).map(ResponseEntity::ok)
+                .orElseThrow(() -> new NotFoundException(
+                        "No se encontró la publicación con id " + id));
     }
 
     @GetMapping("/{id}/comments")
-    public ResponseEntity<List<Comment>> comments(@PathVariable @Min(1) Long id){
-        if (service.getPost(id).isEmpty()) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(service.getCommentsByPost(id));
+    public List<Comment> comments(@PathVariable @Min(1) Long id){
+        service.getPost(id)
+                .orElseThrow(() -> new NotFoundException(
+                        "No se encontró la publicación con id " + id));
+        var list = service.getCommentsByPost(id);
+        if (list.isEmpty()) {
+            throw new NotFoundException("No se encontraron comentarios para la publicación " + id);
+        }
+        return list;
     }
 
     @GetMapping("/{id}/rating/average")
-    public ResponseEntity<Double> average(@PathVariable @Min(1) Long id){
-        if (service.getPost(id).isEmpty()) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(service.getAverageRating(id));
+    public double average(@PathVariable @Min(1) Long id){
+        service.getPost(id)
+                .orElseThrow(() -> new NotFoundException(
+                        "No se encontró la publicación con id " + id));
+        if (service.getCommentsByPost(id).isEmpty()) {
+            throw new NotFoundException("No hay calificaciones para la publicación " + id);
+        }
+        return service.getAverageRating(id);
     }
 
     @GetMapping("/comments")
@@ -43,7 +63,11 @@ public class PostController {
                                         @Min(value = 1, message = "minRating debe ser >= 1")
                                         @Max(value = 5, message = "minRating debe ser <= 5")
                                         Integer minRating){
-        return service.searchComments(minRating);
+        var result = service.searchComments(minRating);
+        if (result.isEmpty()) {
+            throw new NotFoundException("No se encontraron comentarios con el criterio dado");
+        }
+        return result;
     }
 }
 
